@@ -4,8 +4,22 @@ window.onload = function(){
 
 	// I denna funktion ska du skriva koden för att hantera "spelet"
 	var convertString = function(str){
-		// Plats för förändring.		
-		// Returnera den konverterade strängen.
+	var converted = str.replace(/["a","A"]/g, "#");
+	var newConverted;
+    
+    for (var i = 0, len = converted.length; i < len; i++){ 
+        console.log(converted.charAt(i));
+        
+	if(converted.charAt(i) === converted.charAt(i).toUpperCase()){
+	newConverted += converted.charAt(i).toLowerCase();    
+	}
+	else{
+	newConverted += converted.charAt(i).toUpperCase(); 
+	}
+    }
+    return newConverted;
+   
+         // Returnera den konverterade strängen.
 		// Vid fel, kasta ett undantag med ett meddelande till användaren. 
 	
 
