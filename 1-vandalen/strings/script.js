@@ -2,16 +2,17 @@
 
 window.onload = function(){
 
-	// I denna funktion ska du skriva koden för att hantera "spelet"
 	var convertString = function(str){
-	str = str.replace(/["a","A"]/g, "#");
+	str = str.replace(/["a","A"]/g, "#");//byter ut a och A mot #
 	var i = 0;
-	var converted = "";
+	var converted = "";//den konverterade strängen
 
+	//om inte användaren har skrivti in något så skriv felmeddelande ut
 	if(str.length === 0){
     throw new Error("Du måste ange text");
 	}
     
+    //kollar om bokstaven är en versal eller gemen och konverterar den till det motsatta
     for ( i; i < str.length; i++){ 
         console.log(str.charAt(i));
         if(str.charAt(i) == str.charAt(i).toUpperCase()){

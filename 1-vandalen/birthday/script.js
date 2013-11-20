@@ -10,30 +10,31 @@ window.onload = function(){
     var today = new Date();
     var myBirthday = new Date(date.replace(/(\d{4})\.(\d{2})\.(\d{2})/, '$3-$2-$1'));
     
+    //om inmatat format är fel
     if(isNaN(myBirthday)){
     throw new Error("Ange formatet YYYY-MM-DD");
     }
     
-    /*if(myBirthdayMs < todayMs){
-    myBirthday.setFullYear(today.getFullYear() + 1);
+    myBirthday.setFullYear(today.getFullYear());//ändrar året på födelseåret till årets datum
+    
+    //om användaren redan har fyllt år
+    if(myBirthday.getTime() < today.getTime()){
+        myBirthday.setFullYear(today.getFullYear() + 1);
     }
-    else if(myBirthdayMs > todayMs){
-    myBirthday.setFullYear(today.getFullYear());
-    }*/
     
-    myBirthday.setFullYear(today.getFullYear());
-    var todayMs =today.getTime();
-    var myBirthdayMs = myBirthday.getTime();
+    var todayMs =today.getTime(); //dagens datum i millisekunder
+    var myBirthdayMs = myBirthday.getTime();//födelsedagsdatumet i millisekunder
     
-    var diff =myBirthdayMs - todayMs;
+    var diff =myBirthdayMs - todayMs;//kolla skillnaden
     
+     //om klockan är mer 12(inte 00/24)
      if (today.getHours() > 12){
-    return Math.round((diff/dayMs) +1);
+    return Math.round((diff/dayMs) +1);//räknar ut antalt dagar till födelsedag och returnerar detta
     }
     
    else{
        
-   } return Math.round(diff/dayMs);
+   } return Math.round(diff/dayMs);//räknar ut antalt dagar till födelsedag och returnerar detta
     
     
     
