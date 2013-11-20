@@ -4,30 +4,27 @@ window.onload = function(){
 
 	// I denna funktion ska du skriva koden för att hantera "spelet"
 	var convertString = function(str){
-	var converted = str.replace(/["a","A"]/g, "#");
-	var newConverted;
+	str = str.replace(/["a","A"]/g, "#");
+	var i = 0;
+	var converted = "";
+
+	if(str.length === 0){
+    throw new Error("Du måste ange text");
+	}
     
-    for (var i = 0, len = converted.length; i < len; i++){ 
-        console.log(converted.charAt(i));
+    for ( i; i < str.length; i++){ 
+        console.log(str.charAt(i));
+        if(str.charAt(i) == str.charAt(i).toUpperCase()){
+        converted += str.charAt(i).toLowerCase();
+        }
+        else if(str.charAt(i) == str.charAt(i).toLowerCase()){
+            converted += str.charAt(i).toUpperCase();
+        }
         
-	if(converted.charAt(i) === converted.charAt(i).toUpperCase()){
-	newConverted += converted.charAt(i).toLowerCase();    
-	}
-	else{
-	newConverted += converted.charAt(i).toUpperCase(); 
-	}
     }
-    return newConverted;
-   
-         // Returnera den konverterade strängen.
-		// Vid fel, kasta ett undantag med ett meddelande till användaren. 
-	
-
-
-
-
-
-
+    
+    return converted;
+        
 	};
 	// ------------------------------------------------------------------------------
 
