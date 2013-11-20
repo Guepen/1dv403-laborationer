@@ -23,7 +23,6 @@ window.onload = function(){
         }
         
     }
-    
     return converted;
         
 	};
