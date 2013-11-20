@@ -1,24 +1,34 @@
 "use strict";
 
 var makePerson = function(persArr){
-    
-var person = {};
-persArr = [person.name, person.age];
 
+var nameArr = [];
+var ageArr = [];
+var totalAge = 0;
+var averageAge;
+var i = 0;
 
-console.log(person.name);
-console.log(person.age);
+for(i; i < persArr.length; i++){
+    nameArr.push(persArr[i].name);
+    ageArr.push(persArr[i].age);
+    totalAge += persArr[i].age;
+    console.log([i]);
+}
 
- return persArr;
-   // Lös uppgiften
- 
+nameArr.sort();
+ageArr.sort();
+
+var obj = {
+    minAge: ageArr[0],
+    maxAge: ageArr[ageArr.length - 1],
+    averageAge: Math.round(totalAge/ageArr.length),
+    names: nameArr.join(", ")
+};
+      
+return obj;
+
 };
 
-var data = [{name: "John Häggerud", Age: 37}, {name: "Johan Leitet", age: 36}, {name: "Mats Loock", age: 46}];
+var data = [{name: "John Häggerud", age: 37}, {name: "Johan Leitet", age: 36}, {name: "Mats Loock", age: 46}];
 
-var person = makePerson(data);
-
-console.log(person);
-	// Din kod här...
-
-
+var obj = makePerson(data);

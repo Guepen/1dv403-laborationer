@@ -24,7 +24,7 @@ window.onload = function(){
                 }
                 
                else if (number == secret){
-                    return [true, "Rätt! Det hemliga talet var "+ secret +" och du behövde "+ guessCounter +" gissningar för att hitta det."];                
+                    return [true, "Rätt! Det hemliga talet var "+ secret +" , du behövde "+ guessCounter +" gissningar"];                
                }
                     
                 else if (number < secret){
