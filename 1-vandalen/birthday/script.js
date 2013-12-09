@@ -28,13 +28,11 @@ window.onload = function(){
     var diff =myBirthdayMs - todayMs;//kolla skillnaden
     
      //om klockan är mer 12(inte 00/24)
-     if (today.getHours() > 12){
-    return Math.round((diff/dayMs) +1);//räknar ut antalt dagar till födelsedag och returnerar detta
+    if (today.getHours() > 12){
+    return Math.round((diff/dayMs) + 1);//räknar ut antalt dagar till födelsedag och returnerar detta
     }
-    
-   else{
-       
-   } return Math.round(diff/dayMs);//räknar ut antalt dagar till födelsedag och returnerar detta
+    else if(today.getHours() < 12){
+    } return Math.round((diff/dayMs));//räknar ut antalt dagar till födelsedag och returnerar detta
     
     
     
