@@ -2,15 +2,14 @@
 
 var Memory = {
     
-    boards: [],
-    turned: [],
+    boards: [], //array innehållandes alla nedåtvända bilderna
+    turned: [], // arrary som innehåller 2 uppvända bilder
     rows: 4,
     cols: 4,
     countTries: 0,
     
     init: function(){
-       // alert("test");
-        
+      
         Memory.boards = RandomGenerator.getPictureArray(Memory.rows, Memory.cols);
         
         console.log(Memory.boards);
@@ -22,7 +21,7 @@ var Memory = {
     
     RunPicture: function(){
         
-        var memoryPic = -1;
+        var memoryPic = -1; // varje bild kommer att vara en egen siffra 
         var main = document.getElementById("main");
         var table = document.createElement("table");
         table.className = "table";
@@ -36,7 +35,7 @@ var Memory = {
          for (var c = 0; c < Memory.cols; c++){
              
           var img = document.createElement("img");
-          img.setAttribute( "src", "pics/0.png");
+          img.setAttribute( "src", "pics/0.png"); //bilden med frågetecknet sätts som startbild på samtilga bilder
                 
           var a = document.createElement("a");
           var td = document.createElement("td");
@@ -45,8 +44,8 @@ var Memory = {
           a.href = "#";
           td.appendChild(a);
           memoryPic+=1;
+          Memory.turnPicture(a, memoryPic); // anropar funktionen turnPicture och skickar med 2 parametrar
           console.log(memoryPic);
-          Memory.turnPicture(a, memoryPic);
          }
          
         }
@@ -57,23 +56,24 @@ var Memory = {
          
          a.onclick = function(){
              
-             if (a.getElementsByTagName("img")[0].getAttribute("src") !== "pics/0.png"){
+             //gör så det inte går att klicka på en redan uppvänd bild
+             if (a.querySelector("img").getAttribute("src") !== "pics/0.png"){
+                 
                  return false;
              }
              
-             Memory.turned.push(a);
+             Memory.turned.push(a); //"pushar" in de bilderna man tryckt på i arrayen turned
              
+             //om turned arrayen innehåller mindre än tre element så kan man vända på en bild
              if(Memory.turned.length < 3){
-             
-             a.getElementsByTagName("img")[0].setAttribute("src", "pics/" + Memory.boards[memoryPic] + ".png");
+                 
+                 a.querySelector("img").setAttribute("src", "pics/" + Memory.boards[memoryPic] + ".png");
              }
              
+            //om turned arrayen innehåller 2 element körs funktionen checkIfSame
              if(Memory.turned.length === 2){
-                 setTimeout(function() {
-                     
-                      Memory.checkIfSame(Memory.turned, a);
-                     
-                 }, 900);
+                 
+                 Memory.checkIfSame(Memory.turned, a);
                 
              }
              
@@ -83,29 +83,38 @@ var Memory = {
     
     checkIfSame: function(check, a){
         
-        
-        if(check[0].getElementsByTagName("img")[0].getAttribute("src") === check[1].getElementsByTagName("img")[0].getAttribute("src")){
+        //kollar om de två uppvända bilderna är identiska
+        if(check[0].querySelector("img").getAttribute("src") === check[1].querySelector("img").getAttribute("src")){
             
+            //kunde tömt arrayen på ett enklare sätt t.ex. Memory.turned = []; men kul att testa lite nytt!
+            Memory.turned.pop(); //tar bort det sista elementet i arrayen
+            Memory.turned.shift(); //tar bort det första elementet i arrayen.
             console.log(Memory.turned);
-            Memory.turned = [];
             
             Memory.countTries++;
             
         }
         
+        //om bilderna inte är identiska
         else{
             
+            setTimeout(function() {
+                
             check[0].getElementsByTagName("img")[0].setAttribute("src", "pics/0.png");
             check[1].getElementsByTagName("img")[0].setAttribute("src", "pics/0.png");
             Memory.turned = [];
+                
+            }, 900);
             
-            Memory.countTries++;
-            
-               if (a.getElementsByTagName("img")[0].getAttribute("src") !== "pics/0.png"){
-             
-             alert("grattis!");
-         
-         }
+        }
+        
+        //kollar om alla bilderna är uppvända, i så fall har användaren "vunnit".
+        if(Memory.countTries == Memory.boards.length/2){
+            setTimeout(function() {
+                
+                alert("Grattis");
+                
+            }, 900);
         }
         
     },
