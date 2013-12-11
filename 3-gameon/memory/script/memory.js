@@ -55,8 +55,6 @@ var Memory = {
     
      turnPicture: function(a, memoryPic){
          
-         var countClicks = 0;
-         
          a.onclick = function(){
              
              if (a.getElementsByTagName("img")[0].getAttribute("src") !== "pics/0.png"){
@@ -67,26 +65,23 @@ var Memory = {
              
              if(Memory.turned.length < 3){
              
-             a.querySelector("img").setAttribute("src", "pics/" + Memory.boards[memoryPic] + ".png");
+             a.getElementsByTagName("img")[0].setAttribute("src", "pics/" + Memory.boards[memoryPic] + ".png");
              }
              
              if(Memory.turned.length === 2){
                  setTimeout(function() {
                      
-                      Memory.checkIfSame(Memory.turned);
+                      Memory.checkIfSame(Memory.turned, a);
                      
                  }, 900);
                 
              }
              
-             countClicks++;
-             
-             
          };
         
     },
     
-    checkIfSame: function(check){
+    checkIfSame: function(check, a){
         
         
         if(check[0].getElementsByTagName("img")[0].getAttribute("src") === check[1].getElementsByTagName("img")[0].getAttribute("src")){
@@ -96,10 +91,6 @@ var Memory = {
             
             Memory.countTries++;
             
-            if(Memory.countTries === (Memory.rows*Memory.cols)/2){
-                
-                alert("Grattis!");
-            }
         }
         
         else{
@@ -109,6 +100,12 @@ var Memory = {
             Memory.turned = [];
             
             Memory.countTries++;
+            
+               if (a.getElementsByTagName("img")[0].getAttribute("src") !== "pics/0.png"){
+             
+             alert("grattis!");
+         
+         }
         }
         
     },
