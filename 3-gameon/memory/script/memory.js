@@ -3,8 +3,10 @@
 var Memory = {
     
     boards: [],
+    turned: [],
     rows: 4,
     cols: 4,
+    countTries: 0,
     
     init: function(){
        // alert("test");
@@ -43,7 +45,7 @@ var Memory = {
           a.href = "#";
           td.appendChild(a);
           memoryPic+=1;
-          
+          console.log(memoryPic);
           Memory.turnPicture(a, memoryPic);
          }
          
@@ -53,13 +55,61 @@ var Memory = {
     
      turnPicture: function(a, memoryPic){
          
+         var countClicks = 0;
+         
          a.onclick = function(){
              
+             if (a.getElementsByTagName("img")[0].getAttribute("src") !== "pics/0.png"){
+                 return false;
+             }
+             
+             Memory.turned.push(a);
+             
+             if(Memory.turned.length < 3){
+             
              a.querySelector("img").setAttribute("src", "pics/" + Memory.boards[memoryPic] + ".png");
+             }
+             
+             if(Memory.turned.length === 2){
+                 setTimeout(function() {
+                     
+                      Memory.checkIfSame(Memory.turned);
+                     
+                 }, 900);
+                
+             }
+             
+             countClicks++;
+             
              
          };
         
+    },
+    
+    checkIfSame: function(check){
         
+        
+        if(check[0].getElementsByTagName("img")[0].getAttribute("src") === check[1].getElementsByTagName("img")[0].getAttribute("src")){
+            
+            console.log(Memory.turned);
+            Memory.turned = [];
+            
+            Memory.countTries++;
+            
+            if(Memory.countTries === (Memory.rows*Memory.cols)/2){
+                
+                alert("Grattis!");
+            }
+        }
+        
+        else{
+            
+            check[0].getElementsByTagName("img")[0].setAttribute("src", "pics/0.png");
+            check[1].getElementsByTagName("img")[0].setAttribute("src", "pics/0.png");
+            Memory.turned = [];
+            
+            Memory.countTries++;
+        }
         
     },
     
