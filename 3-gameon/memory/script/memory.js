@@ -7,6 +7,7 @@ var Memory = {
     rows: 4,
     cols: 4,
     countTries: 0,
+    countTriesToWin: 0,
     
     init: function(){
       
@@ -45,7 +46,7 @@ var Memory = {
           td.appendChild(a);
           memoryPic+=1;
           Memory.turnPicture(a, memoryPic); // anropar funktionen turnPicture och skickar med 2 parametrar
-          console.log(memoryPic);
+          //console.log(memoryPic);
          }
          
         }
@@ -62,7 +63,7 @@ var Memory = {
                  return false;
              }
              
-             Memory.turned.push(a); //"pushar" in de bilderna man tryckt på i arrayen turned
+             Memory.turned.push(a); //"pushar" in de bilderna man tryckt på till arrayen turned
              
              //om turned arrayen innehåller mindre än tre element så kan man vända på en bild
              if(Memory.turned.length < 3){
@@ -92,6 +93,7 @@ var Memory = {
             console.log(Memory.turned);
             
             Memory.countTries++;
+            Memory.countTriesToWin++;
             
         }
         
@@ -103,6 +105,8 @@ var Memory = {
             check[0].getElementsByTagName("img")[0].setAttribute("src", "pics/0.png");
             check[1].getElementsByTagName("img")[0].setAttribute("src", "pics/0.png");
             Memory.turned = [];
+            
+             Memory.countTriesToWin++;
                 
             }, 900);
             
@@ -112,7 +116,7 @@ var Memory = {
         if(Memory.countTries == Memory.boards.length/2){
             setTimeout(function() {
                 
-                alert("Grattis");
+                alert("Grattis, du klarade det och det krävdes " + Memory.countTriesToWin + " försök");
                 
             }, 900);
         }
